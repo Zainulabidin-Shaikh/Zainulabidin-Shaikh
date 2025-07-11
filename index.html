@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zainulabidin Shaikh - Aspiring Data Scientist</title>
+    <meta name="description" content="Personal website of Zainulabidin Shaikh, an aspiring data scientist and open source learner specializing in AI/ML.">
+    <meta name="keywords" content="data science, machine learning, AI, python, data analysis">
+    <meta name="author" content="Zainulabidin Shaikh">
+    <meta property="og:title" content="Zainulabidin Shaikh - Aspiring Data Scientist">
+    <meta property="og:description" content="Personal website showcasing my journey in data science, machine learning, and AI.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+        
+        @layer base {
+            html {
+                scroll-behavior: smooth;
+            }
+            
+            body {
+                font-feature-settings: "rlig" 1, "calt" 1;
+                font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+            }
+        }
+        
+        @layer utilities {
+            .prose {
+                max-width: none;
+            }
+        }
+        
+        /* Custom scrollbar - monochrome */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #6b7280;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+        
+        /* Smooth transitions for all interactive elements */
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+        }
+        
+        /* Custom SVG icon styles */
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+        
+        .external-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        .follow-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .follow-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.6s;
+        }
+        
+        .follow-btn:hover::after {
+            left: 100%;
+        }
+        
+        .follow-btn.following .checkmark {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .checkmark {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .form-container {
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+        
+        .contact-section {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .platform-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .platform-option:hover {
+            background-color: #f9fafb;
+        }
+        
+        .platform-option:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-10 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <h1 class="text-xl font-semibold text-black hover:underline decoration-2 underline-offset-4 transition-all duration-300 cursor-pointer">
+                Zainulabidin Shaikh
+            </h1>
+        </div>
+    </header>
+
+    <div class="pt-20 max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Sidebar -->
+            <aside class="lg:w-80 lg:sticky lg:top-24 lg:self-start">
+                <div class="space-y-8">
+                    <!-- Profile Section -->
+                    <div class="text-center space-y-4">
+                        <div class="w-32 h-32 rounded-full border-2 border-gray-300 flex items-center justify-center text-black text-2xl font-bold mx-auto">
+                            ZS
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-black">Zainulabidin Shaikh</h2>
+                            <p class="text-gray-600 mt-1">Aspiring Data Scientist | Open Source Learner</p>
+                            <div class="flex items-center justify-center gap-2 text-gray-500 mt-2">
+                                <svg class="icon">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Mumbai, India</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="space-y-3">
+                        <a
+                            href="https://www.linkedin.com/in/zainulabidin-shaikh/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-3 p-2 hover:bg-gray-50 transition-colors duration-200 group"
+                        >
+                            <svg class="icon">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                            <span class="text-gray-700">LinkedIn</span>
+                            <svg class="external-icon text-gray-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+
+                        <a
+                            href="https://github.com/Zainulabidin-Shaikh"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-3 p-2 hover:bg-gray-50 transition-colors duration-200 group"
+                        >
+                            <svg class="icon">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            <span class="text-gray-700">GitHub</span>
+                            <svg class="external-icon text-gray-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+
+                        <a
+                            href="mailto:zainulabidinshaikh12@gmail.com"
+                            class="flex items-center gap-3 p-2 hover:bg-gray-50 transition-colors duration-200 group"
+                        >
+                            <svg class="icon">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span class="text-gray-700">Email</span>
+                            <svg class="external-icon text-gray-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="space-y-4">
+                        <div class="border-l-2 border-gray-300 pl-6 py-2">
+                            <h3 class="font-semibold text-black">Minor Degree in Data Science</h3>
+                            <p class="text-gray-600">IIT Guwahati</p>
+                        </div>
+                        <div class="border-l-2 border-gray-300 pl-6 py-2">
+                            <h3 class="font-semibold text-black">Certified Data Scientist</h3>
+                            <p class="text-gray-600">Datamites, Mumbai</p>
+                        </div>
+                        <div class="border-l-2 border-gray-300 pl-6 py-2">
+                            <h3 class="font-semibold text-black">BCA (Pursuing)</h3>
+                            <p class="text-gray-600">Amity University Online</p>
+                        </div>
+                    </div>
+
+                    <!-- CV Download -->
+                    <div class="pt-4">
+                        <a
+                            href="#"
+                            class="flex items-center justify-center gap-2 w-full border-2 border-black text-black py-3 px-4 hover:bg-black hover:text-white transition-colors duration-200 font-medium"
+                        >
+                            <svg class="icon">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download CV
+                        </a>
+                    </div>
+                    
+                    <!-- Follow Button -->
+                    <div class="pt-4">
+                        <button id="followButton" class="follow-btn flex items-center justify-center gap-2 w-full border-2 border-black text-black py-3 px-4 hover:bg-black hover:text-white transition-colors duration-200 font-medium relative">
+                            <span id="followText">Follow</span>
+                            <svg class="checkmark icon w-5 h-5" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 space-y-12">
+                <!-- About Me -->
+                <section>
+                    <h1 class="text-3xl font-bold text-black mb-6">About Me</h1>
+                    <div class="prose prose-lg text-gray-700 leading-relaxed">
+                        <p>
+                            Hi, I'm Zainulabidin! I'm an open-source and public learner in Data Science, AI/ML. I solve real-world problems through data and share my learning journey online. Currently, I'm building strong foundations in machine learning and currently learning deep learning and generative AI.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Technical Skills & Expertise -->
+                <section>
+                    <h2 class="text-2xl font-bold text-black mb-6">Technical Skills & Expertise</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="border-l-2 border-gray-300 pl-6">
+                            <h3 class="font-bold text-black mb-3">Programming</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Python (Intermediate)</li>
+                                <li>• SQL (Basic to Intermediate)</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-2 border-gray-300 pl-6">
+                            <h3 class="font-bold text-black mb-3">Data Science Process</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Data Understanding, Cleaning & Preprocessing</li>
+                                <li>• Exploratory Data Analysis (EDA)</li>
+                                <li>• Feature Engineering techniques</li>
+                                <li>• Statistical techniques</li>
+                                <li>• Model tuning and training</li>
+                                <li>• ML Pipeline Development</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-2 border-gray-300 pl-6">
+                            <h3 class="font-bold text-black mb-3">Machine Learning</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Scikit-learn Workflows</li>
+                                <li>• Supervised Learning Algorithms</li>
+                                <li>• Unsupervised Learning Techniques</li>
+                                <li>• Model Evaluation & Metrics</li>
+                                <li>• Hyperparameter tuning</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-2 border-gray-300 pl-6">
+                            <h3 class="font-bold text-black mb-3">Tools & Environments</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Jupyter Notebooks</li>
+                                <li>• Git Version Control</li>
+                                <li>• Google Colab</li>
+                                <li>• Basic Command Line</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects & Accomplishments -->
+                <section>
+                    <h2 class="text-2xl font-bold text-black mb-6">Projects & Accomplishments</h2>
+                    <div class="space-y-6">
+                        <div class="border-l-2 border-gray-300 pl-6">
+                            <h3 class="font-bold text-black mb-2">Telecom Customer Churn Prediction</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Built end-to-end ML pipeline for predicting customer churn</li>
+                                <li>• Achieved 85% accuracy using ensemble methods</li>
+                                <li>• Identified key factors influencing customer retention</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-2 border-gray-300 pl-6">
+                            <h3 class="font-bold text-black mb-2">30 Days of Machine Learning Challenge</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Completed daily ML exercises and mini-projects</li>
+                                <li>• Implemented various algorithms from scratch</li>
+                                <li>• Documented learning journey on LinkedIn</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-2 border-gray-300 pl-6">
+                            <h3 class="font-bold text-black mb-2">Data Analysis Portfolio</h3>
+                            <ul class="space-y-1 text-gray-700">
+                                <li>• Created visualizations for complex datasets</li>
+                                <li>• Performed statistical analysis to extract insights</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Current Focus Areas -->
+                <section>
+                    <h2 class="text-2xl font-bold text-black mb-6">Current Focus Areas</h2>
+                    <div class="border-l-2 border-gray-300 pl-6">
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• Building a robust portfolio of end-to-end ML projects</li>
+                            <li>• Improving model deployment skills with Flask and Streamlit</li>
+                            <li>• Networking with data professionals and seeking mentorship</li>
+                            <li>• Open to contribute</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Next Learning Milestones -->
+                <section>
+                    <h2 class="text-2xl font-bold text-black mb-6">Next Learning Milestones</h2>
+                    <div class="border-l-2 border-gray-300 pl-6">
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• Deep Learning (CNNs, Neural Nets)</li>
+                            <li>• NLP (Transformers, Text Classification)</li>
+                            <li>• Computer Vision (Image processing, Object detection)</li>
+                            <li>• GenAI (Prompt engineering, LLMs)</li>
+                            <li>• MLOps and Model Deployment at Scale</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Let's Connect with Google Form -->
+                <section class="contact-section border-t border-gray-200 pt-8">
+                    <h2 class="text-2xl font-bold text-black mb-4">Let's Connect</h2>
+                    <p class="text-gray-700 mb-6">
+                        Feel free to reach out if you'd like to collaborate or discuss ideas. Fill out the form below:
+                    </p>
+                    
+                    <!-- Google Form Embed -->
+                    <div class="form-container mb-6">
+                        <iframe 
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSd82iWmfoON_pajkCSQHkVwiuIJk3WTz5e589P0v-jJ93NEAA/viewform?embedded=true" 
+                            width="100%" 
+                            height="700" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0"
+                        >
+                            Loading…
+                        </iframe>
+                    </div>
+                    
+                    <p class="text-gray-600 text-sm mt-4">
+                        Alternatively, you can email me directly at: 
+                        <a href="mailto:zainulabidinshaikh12@gmail.com" class="text-black underline hover:no-underline">
+                            zainulabidinshaikh12@gmail.com
+                        </a>
+                    </p>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 bg-gray-100 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="text-center space-y-2">
+                <div class="text-black font-semibold">Sitemap</div>
+                <div class="text-gray-600">
+                    <span class="font-medium">FOLLOW: </span>
+                    <a href="https://www.linkedin.com/in/zainulabidin-shaikh/" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors">LinkedIn</a> | 
+                    <a href="https://github.com/Zainulabidin-Shaikh" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors">GitHub</a> | 
+                    @Zainulabidin Shaikh
+                </div>
+                <div class="text-gray-600">Self Learner | Open Source Contributor</div>
+                <div class="text-gray-500 text-sm">© 2025 Zainulabidin Shaikh. Powered by HTML/CSS</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Follow Platform Selection Modal -->
+    <div id="followModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-black mb-4">Where would you like to follow?</h3>
+                <p class="text-gray-600 mb-6">Select a platform to stay updated with my journey</p>
+                
+                <div class="space-y-3">
+                    <div class="platform-option" data-platform="linkedin">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">LinkedIn</div>
+                            <div class="text-sm text-gray-500">Professional network</div>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-option" data-platform="medium">
+                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">Medium</div>
+                            <div class="text-sm text-gray-500">Blog posts & articles</div>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-option" data-platform="twitter">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">X (Twitter)</div>
+                            <div class="text-sm text-gray-500">Quick updates & thoughts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button id="closeModal" class="px-4 py-2 text-gray-500 hover:text-gray-700 font-medium">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Follow button functionality
+        const followButton = document.getElementById('followButton');
+        const followText = document.getElementById('followText');
+        const followModal = document.getElementById('followModal');
+        const closeModal = document.getElementById('closeModal');
+        const platformOptions = document.querySelectorAll('.platform-option');
+        
+        // Show modal on follow button click
+        followButton.addEventListener('click', function() {
+            followModal.classList.add('active');
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            followModal.classList.remove('active');
+        });
+        
+        // Close modal when clicking outside
+        followModal.addEventListener('click', function(e) {
+            if (e.target === followModal) {
+                followModal.classList.remove('active');
+            }
+        });
+        
+        // Platform selection
+        platformOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const platform = this.getAttribute('data-platform');
+                
+                // Update button to show "Following"
+                followButton.classList.add('following');
+                followText.textContent = 'Following';
+                
+                // Close modal
+                followModal.classList.remove('active');
+                
+                // Show confirmation message
+                let platformName = "";
+                switch(platform) {
+                    case "linkedin":
+                        platformName = "LinkedIn";
+                        break;
+                    case "medium":
+                        platformName = "Medium";
+                        break;
+                    case "twitter":
+                        platformName = "X (Twitter)";
+                        break;
+                }
+                
+                setTimeout(() => {
+                    alert(`Thank you for following on ${platformName}! You'll receive updates about my journey.`);
+                }, 300);
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
